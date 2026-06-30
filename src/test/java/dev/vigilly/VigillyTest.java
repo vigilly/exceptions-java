@@ -18,9 +18,9 @@ import org.junit.jupiter.api.Test;
 
 class VigillyTest {
 
-    private static final String DSN = "https://abc123def456@my-project.vigilly.dev/77";
+    private static final String DSN = "https://abc123def456@vigilly.dev/77";
     private static final String EXPECTED_URL =
-            "https://my-project.vigilly.dev/api/observe/77/envelope/";
+            "https://vigilly.dev/api/observe/77/envelope/";
 
     /** Records the URL it is created with and every envelope it is asked to send. */
     private static final class RecordingTransportFactory implements ITransportFactory {
@@ -66,7 +66,7 @@ class VigillyTest {
         assertEquals(
                 EXPECTED_URL,
                 recording.url,
-                "init must point the transport at the Vigilly Observe ingest path");
+                "init must point the transport at the Vigilly Observe ingest path on the DSN host");
     }
 
     @Test

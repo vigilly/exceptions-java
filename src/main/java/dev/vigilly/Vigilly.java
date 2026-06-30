@@ -15,7 +15,7 @@ import io.sentry.protocol.User;
  * capturing exceptions and messages, recording breadcrumbs, and attaching context.
  *
  * <pre>{@code
- * Vigilly.init("https://<publicKey>@<project>.vigilly.dev/<projectId>");
+ * Vigilly.init("https://<publicKey>@vigilly.dev/<projectId>");
  * try {
  *     doWork();
  * } catch (Exception e) {
@@ -32,7 +32,7 @@ public final class Vigilly {
 
     /**
      * Initializes the client with a Vigilly DSN of the form
-     * {@code https://<publicKey>@<project>.vigilly.dev/<projectId>}.
+     * {@code https://<publicKey>@vigilly.dev/<projectId>}.
      */
     public static void init(final String dsn) {
         init(new VigillyOptions(dsn));
@@ -47,7 +47,7 @@ public final class Vigilly {
         if (dsn == null || dsn.trim().isEmpty()) {
             throw new IllegalArgumentException(
                     "A Vigilly DSN is required, e.g. "
-                            + "https://<publicKey>@<project>.vigilly.dev/<projectId>");
+                            + "https://<publicKey>@vigilly.dev/<projectId>");
         }
 
         final ITransportFactory override = vigillyOptions.getTransportFactory();

@@ -58,7 +58,7 @@ import dev.vigilly.VigillyLevel;
 
 public class App {
     public static void main(String[] args) {
-        Vigilly.init("https://<publicKey>@<project>.vigilly.dev/<projectId>");
+        Vigilly.init("https://<publicKey>@vigilly.dev/<projectId>");
 
         Vigilly.setTag("region", "eu-west-1");
         Vigilly.addBreadcrumb("starting work", "lifecycle");
@@ -84,7 +84,7 @@ Or configure via `VigillyOptions`:
 import dev.vigilly.Vigilly;
 import dev.vigilly.VigillyOptions;
 
-Vigilly.init(new VigillyOptions("https://<publicKey>@<project>.vigilly.dev/<projectId>")
+Vigilly.init(new VigillyOptions("https://<publicKey>@vigilly.dev/<projectId>")
         .setEnvironment("production")
         .setRelease("app@1.4.2")
         .setDebug(false));
@@ -93,18 +93,23 @@ Vigilly.init(new VigillyOptions("https://<publicKey>@<project>.vigilly.dev/<proj
 ## DSN format
 
 ```
-https://<publicKey>@<project>.vigilly.dev/<projectId>
+https://<publicKey>@vigilly.dev/<projectId>
 ```
 
-- `<publicKey>` — the project's public key, sent as DSN auth in the `X-Sentry-Auth` header.
-- `<project>` — the project subdomain on `vigilly.dev`.
-- `<projectId>` — the numeric project id.
+- `<publicKey>` — the project's public key. It **identifies the service** at the ingest endpoint and
+  is sent as DSN auth in the `X-Sentry-Auth` header.
+- `vigilly.dev` — the Vigilly Observe ingest host, used as-is. The DSN host is the env host
+  (`vigilly.dev` in prod, also `staging.vigilly.dev` / `local.vigilly.dev`) — **not** a per-service
+  subdomain.
+- `<projectId>` — present for Sentry-DSN-format compatibility. It is echoed into the ingest path but
+  is not used to resolve the service (the public key is).
 
-The underlying SDK would derive the ingest URL `https://<project>.vigilly.dev/api/<projectId>/envelope/`.
-Vigilly's ingest lives one segment deeper, so this client rewrites every request to:
+The underlying SDK would derive the ingest URL `https://vigilly.dev/api/<projectId>/envelope/`.
+Vigilly's ingest lives one segment deeper, so this client rewrites every request — preserving the DSN
+host as-is — to:
 
 ```
-https://<project>.vigilly.dev/api/observe/<projectId>/envelope/
+https://vigilly.dev/api/observe/<projectId>/envelope/
 ```
 
 DSN public-key authentication (the `X-Sentry-Auth` header) is preserved unchanged.

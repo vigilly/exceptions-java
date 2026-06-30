@@ -6,7 +6,7 @@ import io.sentry.ITransportFactory;
  * Configuration for {@link Vigilly#init(VigillyOptions)}.
  *
  * <p>The only required value is the {@link #getDsn() DSN}, which has the form
- * {@code https://<publicKey>@<project>.vigilly.dev/<projectId>}.
+ * {@code https://<publicKey>@vigilly.dev/<projectId>}.
  */
 public final class VigillyOptions {
 
