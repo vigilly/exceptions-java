@@ -1,0 +1,20 @@
+Vigilly Exceptions Client for Java
+Copyright (c) Vigilly
+
+This product is licensed under the MIT License (see LICENSE).
+
+------------------------------------------------------------------------
+Third-party software
+------------------------------------------------------------------------
+
+This library wraps and depends on the Sentry Java SDK (sentry-java):
+
+    io.sentry:sentry
+    https://github.com/getsentry/sentry-java
+    Copyright (c) Sentry (https://sentry.io) and individual contributors.
+    Licensed under the MIT License.
+
+The Sentry SDK is used unmodified as a runtime dependency. Vigilly is not
+affiliated with or endorsed by Functional Software, Inc. (Sentry). "Sentry"
+is a trademark of its respective owner and is referenced here only to
+identify the wrapped, MIT-licensed client library.
